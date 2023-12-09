@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cb78bf4151rt0"]
+
+[ext_resource type="Texture2D" uid="uid://dtw2ftajwegy8" path="res://graphics/objects/toilet.png" id="1_83gqp"]
+
+[node name="toilet" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 11
+
+[node name="toiletImage" type="Sprite2D" parent="."]
+texture = ExtResource("1_83gqp")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-94, -113)
+polygon = PackedVector2Array(27, -8, 190, -7, 212, 8, 212, 37, 197, 49, 185, 57, 195, 84, 191, 126, 172, 169, 146, 205, 111, 228, 80, 227, 52, 201, 23, 165, 2, 123, -4, 81, 12, 51, -15, 44, -18, 17, -9, -5)

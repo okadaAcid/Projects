@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://rhhv2qi4p0sq"]
+
+[ext_resource type="PackedScene" uid="uid://6bnlyndasv3y" path="res://scenes/Light/simple_light.tscn" id="1_vfqx4"]
+
+[node name="SimpleLight" instance=ExtResource("1_vfqx4")]
+
+[node name="PointLight2D" parent="." index="2"]
+color = Color(0.843137, 0.25098, 0.745098, 1)
