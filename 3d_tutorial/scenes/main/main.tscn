@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://qplhbaemoi7h"]
+[gd_scene load_steps=11 format=3 uid="uid://qplhbaemoi7h"]
 
 [ext_resource type="PackedScene" uid="uid://drvotnnbycnvw" path="res://scenes/player/player.tscn" id="1_2hidt"]
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_luf86"]
 [ext_resource type="PackedScene" uid="uid://ccuwkxi6okw85" path="res://scenes/mob/mob.tscn" id="2_6jql0"]
+[ext_resource type="Script" path="res://scenes/main/ScoreLabel.gd" id="4_fm1cs"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e5vk2"]
 custom_solver_bias = 0.009
@@ -25,6 +26,8 @@ _data = {
 }
 point_count = 5
 
+[sub_resource type="Theme" id="Theme_brqw4"]
+
 [node name="Main" type="Node"]
 script = ExtResource("1_luf86")
 mob_scene = ExtResource("2_6jql0")
@@ -41,10 +44,10 @@ mesh = SubResource("BoxMesh_ksumo")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.54895, 0.835855, 0, -0.835855, -0.54895, 0, 20.0871, 0)
+light_energy = 1.647
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_2hidt")]
-metadata/_edit_lock_ = true
 
 [node name="CameraPivot" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.885799, 0.464069, 0, -0.464069, 0.885799, 0, 17.2094, 6.02654)
@@ -86,4 +89,52 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12.99
 wait_time = 0.5
 autostart = true
 
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreLabel" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 13.0
+offset_right = 80.0
+offset_bottom = 39.0
+theme = SubResource("Theme_brqw4")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 22
+text = "Score: 0
+"
+script = ExtResource("4_fm1cs")
+
+[node name="Retry" type="ColorRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Label" type="Label" parent="UI/Retry"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -13.0
+offset_right = 75.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 22
+text = "Press Enter to retry"
+
+[connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]

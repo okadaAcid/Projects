@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsulskmflujbx"]
+
+[ext_resource type="Texture2D" uid="uid://b61p1663fly33" path="res://assets/tree_texture_for_ball.png" id="1_njyry"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dh4c2"]
+friction = 0.89
+bounce = 0.23
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0tcfy"]
+radius = 244.131
+
+[node name="bar" type="StaticBody2D"]
+position = Vector2(581, 105)
+scale = Vector2(0.05, 0.05)
+physics_material_override = SubResource("PhysicsMaterial_dh4c2")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_njyry")
+region_enabled = true
+region_rect = Rect2(626.947, 164.43, 705.081, 641.305)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-8, 8)
+shape = SubResource("CircleShape2D_0tcfy")

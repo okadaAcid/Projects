@@ -1,3 +1,10 @@
+AnimationPlayer
+AudioStreamPlayer3D
+Label
+ColorRect
+Control
+CollisionShape3D
+Area3D
 RigidBody3D
 Timer
 PathFollow3D
@@ -5,7 +12,6 @@ Path3D
 MeshInstance3D
 Node3D
 VisibleOnScreenEnabler3D
-CollisionShape3D
 CharacterBody3D
 Camera3D
 Marker3D

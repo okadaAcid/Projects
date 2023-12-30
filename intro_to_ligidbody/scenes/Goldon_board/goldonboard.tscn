@@ -1,0 +1,141 @@
+[gd_scene load_steps=8 format=3 uid="uid://bsrdujxpnfomw"]
+
+[ext_resource type="Script" path="res://scenes/Goldon_board/goldonboard.gd" id="1_1rq48"]
+[ext_resource type="Texture2D" uid="uid://cchtm86aev5bu" path="res://assets/tree_texture.png" id="1_jk2ar"]
+[ext_resource type="Script" path="res://scenes/Goldon_board/barcontainer.gd" id="3_ap4n7"]
+[ext_resource type="PackedScene" uid="uid://bq5i7jxf8o807" path="res://scenes/stick/stick.tscn" id="4_06d8b"]
+[ext_resource type="Script" path="res://scenes/Goldon_board/balls.gd" id="5_033ac"]
+[ext_resource type="PackedScene" uid="uid://drovoi12oyb5h" path="res://scenes/stick/enterwall.tscn" id="6_6v1uf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ean82"]
+size = Vector2(1166, 66)
+
+[node name="Goldonboard" type="Node2D"]
+script = ExtResource("1_1rq48")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(631, -67)
+
+[node name="floor" type="StaticBody2D" parent="."]
+position = Vector2(-8, 196)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
+position = Vector2(583, 666)
+shape = SubResource("RectangleShape2D_ean82")
+
+[node name="Sprite2D" type="Sprite2D" parent="floor"]
+position = Vector2(582.5, 664)
+scale = Vector2(28.2195, 0.324022)
+texture = ExtResource("1_jk2ar")
+region_enabled = true
+region_rect = Rect2(147, 246, 41, 179)
+
+[node name="barcontainer" type="Node2D" parent="."]
+position = Vector2(1065, 554)
+rotation = 2.35619
+script = ExtResource("3_ap4n7")
+
+[node name="enterwall" parent="." instance=ExtResource("6_6v1uf")]
+position = Vector2(569, -60)
+
+[node name="enterbars" type="Node2D" parent="."]
+
+[node name="wallcontainer" type="Node2D" parent="."]
+
+[node name="stick" parent="wallcontainer" instance=ExtResource("4_06d8b")]
+position = Vector2(1152, 672)
+
+[node name="stick2" parent="wallcontainer" instance=ExtResource("4_06d8b")]
+position = Vector2(1088, 672)
+
+[node name="stick3" parent="wallcontainer" instance=ExtResource("4_06d8b")]
+position = Vector2(1024, 672)
+
+[node name="stick4" parent="wallcontainer" instance=ExtResource("4_06d8b")]
+position = Vector2(960, 672)
+
+[node name="stick5" parent="wallcontainer" instance=ExtResource("4_06d8b")]
+position = Vector2(896, 672)
+
+[node name="stick6" parent="wallcontainer" instance=ExtResource("4_06d8b")]
+position = Vector2(832, 672)
+
+[node name="stick7" parent="wallcontainer" instance=ExtResource("4_06d8b")]
+position = Vector2(768, 672)
+
+[node name="stick8" parent="wallcontainer" instance=ExtResource("4_06d8b")]
+position = Vector2(704, 672)
+
+[node name="stick9" parent="wallcontainer" instance=ExtResource("4_06d8b")]
+position = Vector2(640, 672)
+
+[node name="stick10" parent="wallcontainer" instance=ExtResource("4_06d8b")]
+position = Vector2(576, 672)
+
+[node name="stick11" parent="wallcontainer" instance=ExtResource("4_06d8b")]
+position = Vector2(512, 672)
+
+[node name="stick12" parent="wallcontainer" instance=ExtResource("4_06d8b")]
+position = Vector2(448, 672)
+
+[node name="stick13" parent="wallcontainer" instance=ExtResource("4_06d8b")]
+position = Vector2(384, 672)
+
+[node name="stick14" parent="wallcontainer" instance=ExtResource("4_06d8b")]
+position = Vector2(320, 672)
+
+[node name="stick15" parent="wallcontainer" instance=ExtResource("4_06d8b")]
+position = Vector2(256, 672)
+
+[node name="stick16" parent="wallcontainer" instance=ExtResource("4_06d8b")]
+position = Vector2(192, 672)
+
+[node name="stick17" parent="wallcontainer" instance=ExtResource("4_06d8b")]
+position = Vector2(128, 672)
+
+[node name="stick18" parent="wallcontainer" instance=ExtResource("4_06d8b")]
+position = Vector2(64, 672)
+
+[node name="stick19" parent="wallcontainer" instance=ExtResource("4_06d8b")]
+position = Vector2(0, 672)
+
+[node name="balls" type="Node2D" parent="."]
+script = ExtResource("5_033ac")
+
+[node name="Control" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = -20.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
