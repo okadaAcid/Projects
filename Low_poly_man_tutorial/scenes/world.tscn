@@ -1,0 +1,80 @@
+[gd_scene load_steps=15 format=3 uid="uid://btiq8ka60wm64"]
+
+[ext_resource type="Texture2D" uid="uid://c6odxsdop1uqw" path="res://addons/kenney_prototype_textures/green/texture_01.png" id="1_0r60r"]
+[ext_resource type="PackedScene" uid="uid://le8ugltxq3b5" path="res://scenes/lowpolyman_tutorial_v_01.tscn" id="2_7lm6u"]
+[ext_resource type="PackedScene" uid="uid://b8fg0t6yyvubh" path="res://scenes/boll.tscn" id="3_e3g1j"]
+[ext_resource type="PackedScene" uid="uid://48i8puc17ap5" path="res://scenes/slant.tscn" id="4_0epty"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_juycn"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_oks5o"]
+sky_material = SubResource("ProceduralSkyMaterial_juycn")
+
+[sub_resource type="Environment" id="Environment_7uvc0"]
+background_mode = 2
+sky = SubResource("Sky_oks5o")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1i385"]
+albedo_texture = ExtResource("1_0r60r")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jjpk7"]
+material = SubResource("StandardMaterial3D_1i385")
+size = Vector2(30, 30)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_vxhq5"]
+data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_luecx"]
+albedo_color = Color(0.0941176, 0.482353, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_l62gc"]
+material = SubResource("StandardMaterial3D_luecx")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o65i6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s367d"]
+
+[node name="World" type="Node"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7uvc0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 5.74151, 0)
+shadow_enabled = true
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_jjpk7")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+transform = Transform3D(1.51, 0, 0, 0, 1.51, 0, 0, 0, 1.51, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_vxhq5")
+
+[node name="lowpolyman_tutorial_v01" parent="." instance=ExtResource("2_7lm6u")]
+metadata/_edit_lock_ = true
+
+[node name="Box01" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.49904, 0.821005, 0.766563)
+mesh = SubResource("BoxMesh_l62gc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Box01"]
+physics_material_override = SubResource("PhysicsMaterial_o65i6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box01/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000715733, 0, 0)
+shape = SubResource("BoxShape3D_s367d")
+
+[node name="boll" parent="." instance=ExtResource("3_e3g1j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.349631, 4.68115, -8.41202)
+
+[node name="boll2" parent="." instance=ExtResource("3_e3g1j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.56337, 1.89843, 9.14041)
+
+[node name="Slant" parent="." instance=ExtResource("4_0epty")]
+transform = Transform3D(-0.0102624, 0, -0.999947, 0, 1, 0, 0.999947, 0, -0.0102624, -0.598693, 1.05154, 8.47378)

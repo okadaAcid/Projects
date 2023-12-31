@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8fg0t6yyvubh"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_satbj"]
+friction = 0.8
+bounce = 0.49
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ixcx8"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_kc0vb"]
+material = SubResource("StandardMaterial3D_ixcx8")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_e45rh"]
+
+[node name="boll" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_satbj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_kc0vb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_e45rh")
