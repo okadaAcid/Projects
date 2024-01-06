@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="Level_01" type="Spatial"]
+
+[node name="Time_limit_timer" type="Timer" parent="."]
+
+[node name="floor" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="floor"]

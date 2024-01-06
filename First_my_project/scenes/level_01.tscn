@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://d1bnfl8l6ijgk"]
+
+[ext_resource type="Script" path="res://scenes/level_01.gd" id="1_isci5"]
+[ext_resource type="PackedScene" uid="uid://bjuctfaar84pj" path="res://scenes/player.tscn" id="1_tklae"]
+[ext_resource type="PackedScene" uid="uid://u0mbmpxsph28" path="res://scenes/balloon.tscn" id="2_0mar3"]
+[ext_resource type="Texture2D" uid="uid://ddc6bh777wdpb" path="res://scenes/Texture/texture_09.png" id="2_rp8pj"]
+[ext_resource type="PackedScene" uid="uid://c7cmgamwrkypt" path="res://scenes/hud_playing.tscn" id="5_temwd"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1vdfy"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_ywtlc"]
+sky_material = SubResource("ProceduralSkyMaterial_1vdfy")
+
+[sub_resource type="Environment" id="Environment_tww8l"]
+background_mode = 2
+sky = SubResource("Sky_ywtlc")
+tonemap_mode = 2
+sdfgi_enabled = true
+glow_enabled = true
+fog_light_color = Color(0.827451, 0.843137, 0.870588, 1)
+fog_density = 0.0015
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0fbgk"]
+albedo_texture = ExtResource("2_rp8pj")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_fj4st"]
+size = Vector3(100, 0.1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yaner"]
+size = Vector3(100, 0.1, 100)
+
+[node name="Level_01" type="Node3D"]
+script = ExtResource("1_isci5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tww8l")
+
+[node name="Time_limit_timer" type="Timer" parent="."]
+autostart = true
+
+[node name="HUD_playing" parent="." instance=ExtResource("5_temwd")]
+
+[node name="floor" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
+material_override = SubResource("StandardMaterial3D_0fbgk")
+mesh = SubResource("BoxMesh_fj4st")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
+shape = SubResource("BoxShape3D_yaner")
+
+[node name="player" parent="." instance=ExtResource("1_tklae")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.10842, 1.04843, 6.51224)
+
+[node name="balloons" type="Node3D" parent="."]
+
+[node name="balloon" parent="balloons" instance=ExtResource("2_0mar3")]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 10.5445, -3.13998, -4.00751)
+
+[node name="balloon2" parent="balloons" instance=ExtResource("2_0mar3")]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 3.5416, -2.89405, 4.6687)
+
+[node name="balloon3" parent="balloons" instance=ExtResource("2_0mar3")]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, -5.62572, -1.41136, -0.0587287)
+
+[node name="balloon4" parent="balloons" instance=ExtResource("2_0mar3")]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, -2.04495, -3.15822, 5.51756)
+
+[node name="balloon5" parent="balloons" instance=ExtResource("2_0mar3")]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 1.02146, -1.47911, -6.55171)
+
+[node name="balloon6" parent="balloons" instance=ExtResource("2_0mar3")]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, -5.17235, -1.08309, -4.92843)
+
+[connection signal="timeout" from="Time_limit_timer" to="." method="_on_time_limit_timer_timeout"]

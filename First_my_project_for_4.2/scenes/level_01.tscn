@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://d1bnfl8l6ijgk"]
+
+[ext_resource type="PackedScene" uid="uid://bjuctfaar84pj" path="res://scenes/player.tscn" id="1_tklae"]
+[ext_resource type="PackedScene" uid="uid://u0mbmpxsph28" path="res://scenes/balloon.tscn" id="2_0mar3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1vdfy"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_ywtlc"]
+sky_material = SubResource("ProceduralSkyMaterial_1vdfy")
+
+[sub_resource type="Environment" id="Environment_tww8l"]
+background_mode = 2
+sky = SubResource("Sky_ywtlc")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j5r6d"]
+albedo_color = Color(0.266667, 1, 0.478431, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fj4st"]
+material = SubResource("StandardMaterial3D_j5r6d")
+size = Vector3(100, 0.1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yaner"]
+size = Vector3(100, 0.1, 100)
+
+[node name="Level_01" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tww8l")
+
+[node name="Time_limit_timer" type="Timer" parent="."]
+
+[node name="floor" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
+mesh = SubResource("BoxMesh_fj4st")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
+shape = SubResource("BoxShape3D_yaner")
+
+[node name="player" parent="." instance=ExtResource("1_tklae")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04843, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.958968, 0.283513, 0, -0.283513, 0.958968, 0, 10, 29)
+
+[node name="balloon" parent="." instance=ExtResource("2_0mar3")]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 4.8926, -1.5995, 0)
+
+[node name="Node3D" type="Node3D" parent="."]
